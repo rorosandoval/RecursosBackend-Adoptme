@@ -48,7 +48,7 @@ const login = async (req, res, next) => {
         .status(400)
         .send({ status: "error", error: "Password incorrecto" });
     const userDto = UserDTO.getUserTokenFrom(user);
-    const token = jwt.sign(userDto, "tokenSecretJWT", { expiresIn: "1h" });
+    const token = jwt.sign(userDto, process.env.JWT_SECRET, { expiresIn: "1h" });
     res
       .cookie("coderCookie", token, { maxAge: 3600000 })
       .send({ status: "success", message: "Logeado" });
@@ -63,7 +63,7 @@ const current = async (req, res, next) => {
     if (!cookie) {
       return res.status(401).send({ status: "error", error: "No autenticado" });
     }
-    const user = jwt.verify(cookie, "tokenSecretJWT");
+    const user = jwt.verify(cookie, process.env.JWT_SECRET);
     if (user) return res.send({ status: "success", payload: user });
   } catch (error) {
     next(error);
@@ -97,7 +97,7 @@ const unprotectedLogin = async (req, res, next) => {
         role: user.role,
         pets: user.pets
       }, 
-      "tokenSecretJWT", 
+      process.env.JWT_SECRET, 
       { expiresIn: "1h" }
     );
     
@@ -118,7 +118,7 @@ const unprotectedCurrent = async (req, res, next) => {
     if (!cookie) {
       return res.status(401).send({ status: "error", error: "No autenticado" });
     }
-    const user = jwt.verify(cookie, "tokenSecretJWT");
+    const user = jwt.verify(cookie, process.env.JWT_SECRET);
     if (user) return res.send({ status: "success", payload: user });
   } catch (error) {
     next(error);
