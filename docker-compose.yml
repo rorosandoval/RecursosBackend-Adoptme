@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6
+    container_name: adoptme-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: adoptmedb
+    restart: unless-stopped
+
+  api:
+    build: .
+    container_name: adoptme-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URL: mongodb://mongodb:27017/adoptmedb
+      PORT: 8080
+      MOCK_USER_PASSWORD: coder123
+      JWT_SECRET: tuclaveSecretaAqui
+    restart: unless-stopped
+    networks:
+      - adoptme-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  adoptme-network:
+    driver: bridge
