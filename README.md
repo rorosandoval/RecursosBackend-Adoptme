@@ -27,16 +27,14 @@ Esta entrega incluye la implementación completa de los requisitos solicitados:
 - `.dockerignore` para optimizar el tamaño de la imagen
 
 ### ✅ Imagen en Dockerhub
-- **Imagen disponible en:** https://hub.docker.com/r/rorosandoval/adoptme-api
-- Comando para descargar: `docker pull rorosandoval/adoptme-api:latest`
+- **Imagen disponible en:** [https://hub.docker.com/r/rodrigosv89/adoptme-entrega-final](https://hub.docker.com/r/rodrigosv89/adoptme-entrega-final)
+- Comando para descargar: `docker pull rodrigosv89/adoptme-entrega-final:latest`
 
 ---
 
-**URL Base:** `http://localhost:8080`
-
-**Documentación Swagger:** `http://localhost:8080/api/docs`
-
-**Dockerhub:** https://hub.docker.com/r/rorosandoval/adoptme-api
+**URL Base:** `http://localhost:8080`  
+**Documentación Swagger:** `http://localhost:8080/api/docs`  
+**Dockerhub:** [rodrigosv89/adoptme-entrega-final](https://hub.docker.com/r/rodrigosv89/adoptme-entrega-final)
 
 ---
 
@@ -104,14 +102,13 @@ docker tag adoptme-api:latest tuusuario/adoptme-api:latest
 #### Opción 1: Con docker run
 
 ```bash
+docker pull rodrigosv89/adoptme-entrega-final:latest
+
 docker run -d \
-  --name adoptme \
+  --name adoptme-api \
   -p 8080:8080 \
-  -e MONGO_URL=mongodb://host.docker.internal:27017/adoptmedb \
-  -e PORT=8080 \
-  -e MOCK_USER_PASSWORD=coder123 \
-  -e JWT_SECRET=tuclaveSecretaAqui \
-  adoptme-api:latest
+  -e MONGO_URL="tu_url_de_mongo_atlas" \
+  rodrigosv89/adoptme-entrega-final:latest
 ```
 
 #### Opción 2: Con docker-compose
@@ -160,10 +157,10 @@ docker-compose up -d
 La imagen está disponible en Dockerhub:
 
 ```
-docker pull rorosandoval/adoptme-api:latest
+docker pull rodrigosv89/adoptme-entrega-final:latest
 ```
 
-**Enlace directo:** https://hub.docker.com/r/rorosandoval/adoptme-api
+**Enlace directo:** https://hub.docker.com/r/rodrigosv89/adoptme-entrega-final
 
 Para ejecutar la imagen desde Dockerhub:
 
@@ -171,9 +168,9 @@ Para ejecutar la imagen desde Dockerhub:
 docker run -d \
   --name adoptme \
   -p 8080:8080 \
-  -e MONGO_URL=mongodb://host.docker.internal:27017/adoptmedb \
+  -e MONGO_URL="tu_url_de_mongo_atlas" \
   -e PORT=8080 \
-  rorosandoval/adoptme-api:latest
+  rodrigosv89/adoptme-entrega-final:latest
 ```
 
 ---
